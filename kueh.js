@@ -7,16 +7,34 @@ var score = 0;
 var currentTile;
 var otherTile;
 
+const startingMinutes = 2;
+let time = startingMinutes*60;
+
+const countdownEl = document.getElementById('countdown');
+
+
 
 window.onload = function() {
   startGame();
-
+  setInterval(updateCountdown,1000);
   //1/10th of a second
   window.setInterval(function(){
     crushKueh();
     slideKueh();
     generateKueh();
   }, 100);
+}
+
+
+
+
+function updateCountdown(){
+  const minutes = Math.floor(time/60); //use floor to retrieve the lowest no
+  let seconds = time % 60;
+
+  seconds = seconds < 10? '0'+ seconds:seconds;
+  countdownEl.innerHTML = `${minutes}:${seconds}`;
+  time--;
 }
 
 function randomKueh() {
@@ -45,7 +63,6 @@ function startGame() {
     }
     board.push(row);
   }
-
   console.log(board);
 }
 
@@ -114,6 +131,9 @@ function crushKueh() {
   //crushFour();
   crushThree();
   document.getElementById("score").innerText = score;
+
+  //do time?
+
 
 }
 
