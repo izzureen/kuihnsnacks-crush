@@ -10,10 +10,21 @@ var otherTile;
 
 
 window.onload = function() {
-  const startingMinutes = 2;
+  const startingMinutes = 1;
   let time = startingMinutes*60;
 
   const countdownEl = document.getElementById('countdown');
+
+
+
+  startGame();
+  let refreshIntervalId = window.setInterval(updateCountdown,1000); //update every 1 sec
+  //1/10th of a second
+  window.setInterval(function(){
+    crushKueh();
+    slideKueh();
+    generateKueh();
+  }, 100);
 
   function updateCountdown(){
     const minutes = Math.floor(time/60); //use floor to retrieve the lowest no
@@ -22,16 +33,10 @@ window.onload = function() {
     seconds = seconds < 10? '0'+ seconds:seconds;
     countdownEl.innerHTML = `${minutes}:${seconds}`;
     time--;
+    if (time < 0) { //stop the setInterval whe time = 0 for avoid negative time
+      clearInterval(refreshIntervalId);
+    }
   }
-
-  startGame();
-  window.setInterval(updateCountdown,1000);
-  //1/10th of a second
-  window.setInterval(function(){
-    crushKueh();
-    slideKueh();
-    generateKueh();
-  }, 100);
 }
 
 
