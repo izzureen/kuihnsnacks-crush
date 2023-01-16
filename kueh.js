@@ -35,6 +35,7 @@ window.onload = function() {
     time--;
     if (time < 0) { //stop the setInterval whe time = 0 for avoid negative time
       clearInterval(refreshIntervalId);
+      alert('Game Over!'); // popup message when the timer ends
     }
   }
 }
