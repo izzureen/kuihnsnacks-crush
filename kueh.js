@@ -33,9 +33,12 @@ window.onload = function() {
     seconds = seconds < 10? '0'+ seconds:seconds;
     countdownEl.innerHTML = `${minutes}:${seconds}`;
     time--;
+    
+    if (time == 0) {
+      alert('Game Over!'); // popup message when the timer ends
+    }
     if (time < 0) { //stop the setInterval whe time = 0 for avoid negative time
       clearInterval(refreshIntervalId);
-      alert('Game Over!'); // popup message when the timer ends
     }
   }
 }
